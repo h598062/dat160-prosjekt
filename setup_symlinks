@@ -62,10 +62,10 @@ for subdir in "$REPO_DIR"/*/; do
   target_symlink="$TARGET_DIR/$dirname"
 
   # Check if exists
-  if [ -e "$target_symlink" ] ; then
-    echo "Skipping $dirname: Name conflict in target directory."
-  elif [ -L "$target_symlink" ]; then
+  if [ -L "$target_symlink" ] ; then
     echo "Skipping $dirname: Target link already exists."
+  elif [ -e "$target_symlink" ]; then
+    echo "Skipping $dirname: Name conflict in target directory."
   else
     ln -s "$subdir" "$target_symlink"
     echo "Created symlink: $target_symlink -> $subdir"
